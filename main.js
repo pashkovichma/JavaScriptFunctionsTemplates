@@ -72,4 +72,32 @@ function add(a, b) {
 }
 `;
 
-console.log(code);
+//console.log(code);
+
+
+//Task 4: Implementing Debounce Function
+function debounce(func, delay) {
+  let timer;
+
+  return function(...args) {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+        func.apply(this, args);
+    }, delay);
+  };
+}
+
+
+//Task 5: Implementing Throttle Function
+function throttle(mainFunction, delay) {
+  let timerFlag = null;
+
+  return (...args) => {
+    if (timerFlag === null) {
+      mainFunction(...args);
+      timerFlag = setTimeout(() => { 
+        timerFlag = null;
+      }, delay);
+    }
+  };
+}
