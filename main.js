@@ -25,3 +25,21 @@ function localize(strings, value) {
 
 console.log(localizedGreeting); // Expected: "Bonjour"
 console.log(localizedIntroduction); // Expected: "Bienvenue sur notre site web"
+
+//Task 2: Advanced Tagged Template
+function highlightKeywords(strings, keywords) {
+  let result = ''; 
+  const templateElements = strings.split(/\${\d+}/);
+  templateElements.forEach((element, index) => {
+      result += element; 
+      result += `<span class='highlight'>${keywords[index]}</span>`;
+  });
+  return result;
+}
+
+const keywords = ["JavaScript", "template", "tagged"];
+const template = "Learn \${0} tagged templates to create custom \${1} literals for \${2} manipulation.";
+
+const highlighted = highlightKeywords(template, keywords);
+
+console.log(highlighted);
