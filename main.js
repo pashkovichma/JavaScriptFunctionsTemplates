@@ -1,12 +1,12 @@
 //Task 1: Quasi-Tagged Templates
 const translations = {
   en: {
-      greet: "Hello",
-      intro: "Welcome to our website"
+    greet: "Hello",
+    intro: "Welcome to our website"
   },
   fr: {
-      greet: "Bonjour",
-      intro: "Bienvenue sur notre site web"
+    greet: "Bonjour",
+    intro: "Bienvenue sur notre site web"
   }
 };
 
@@ -23,16 +23,16 @@ function localize(strings, value) {
   return result;
 }
 
-console.log(localizedGreeting); // Expected: "Bonjour"
-console.log(localizedIntroduction); // Expected: "Bienvenue sur notre site web"
+//console.log(localizedGreeting); // Expected: "Bonjour"
+//console.log(localizedIntroduction); // Expected: "Bienvenue sur notre site web"
 
 //Task 2: Advanced Tagged Template
 function highlightKeywords(strings, keywords) {
   let result = ''; 
   const templateElements = strings.split(/\${\d+}/);
   templateElements.forEach((element, index) => {
-      result += element; 
-      result += `<span class='highlight'>${keywords[index]}</span>`;
+    result += element; 
+    result += `<span class='highlight'>${keywords[index]}</span>`;
   });
   return result;
 }
@@ -42,4 +42,34 @@ const template = "Learn \${0} tagged templates to create custom \${1} literals f
 
 const highlighted = highlightKeywords(template, keywords);
 
-console.log(highlighted);
+//console.log(highlighted);
+
+
+//Task 3: Multiline Tagged Template
+function multiline(strings, ...values) {
+  const template = strings.reduce((result, string, index) => {
+    result += string;
+    result += values[index];
+    return result;
+  }, '');
+
+  const lines = template.split('\n');
+
+  const numberedLines = lines.map((line, index) => {
+    if (index === 0 || index === lines.length - 1) {
+      return '';
+    }
+    const lineNumber = index;
+    const indentation = line.match(/^\s*/)[0];
+    return `${lineNumber} ${indentation}${line}`;
+  });
+  return numberedLines.slice(1, -1).join('\n');
+}
+
+const code = multiline`
+function add(a, b) {
+    return a + b;
+}
+`;
+
+console.log(code);
