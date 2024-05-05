@@ -101,3 +101,16 @@ function throttle(mainFunction, delay) {
     }
   };
 }
+
+//Task 6: Currying Function Implementation
+function curry(func, arity) {
+  return function curried(...args) {
+    if (args.length >= arity) {
+      return func(...args);
+    } else {
+      return function(...nextArgs) {
+        return curried(...args, ...nextArgs);
+      };
+    }
+  };
+}// Expected: 24
